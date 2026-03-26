@@ -49,7 +49,7 @@ Execute o seguinte comando dentro do diretório:
 mvn package
 ```
 
-##  Execução
+## Execução
 
 Após a compilação, execute o `.jar` gerado com o comando:
 
