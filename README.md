@@ -54,5 +54,7 @@ mvn package
 Após a compilação, execute o `.jar` gerado com o comando:
 
 ``` bash
-java -jar construcao-de-compiladores/T1/algumalexico/target/algumalexico-1.0-SNAPSHOT-jar-with-dependencies.jar construcao-de-compiladores/entrada.txt construcao-de-compiladores/saida.txt
+java -jar "construcao-de-compiladores/T1/algumalexico/target/algumalexico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/entrada.txt" "construcao-de-compiladores/saida.txt"
 ```
+
+Sendo primeiro o caminho pro executavel, depois o primeiro argumento do código(a entrada) e o segundo argumento o caminho para o arquivo de saída.
