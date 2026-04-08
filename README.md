@@ -5,8 +5,8 @@ pelo Professor Dr. **Daniel Lucredio** no Departamento de Computação | UFSCar 
 
 ## Autores
 
--   Josué Martins da Conceição RA: 769613 (Turma A)
--   Brenda Raquel Maia RA:757891 (Turma B)
+-   Josué Martins da Conceição RA: 769613 (Turma B)
+-   Brenda Raquel Maia RA:757891 (Turma A)
 
 ## Descrição
 
@@ -39,17 +39,27 @@ O resultado da análise será gerado em:
 
     construcao-de-compiladores/saida.txt
 
-## Compilação
-
-Execute o seguinte comando dentro do diretório:
-
-    construcao-de-compiladores/T1/algumalexico
-
+## 3. Compilar
+Para compilar cada parte do projeto separado, execute o comando nos diretórios especifícos abaixo:
 ``` bash
 mvn package
 ```
 
-## Execução - T1
+-  ## Para compilar T1
+
+Execute o comando dentro do diretório:
+
+    construcao-de-compiladores/T1/algumalexico
+
+-  ## Para compilar T2
+
+Execute o comando dentro do diretório:
+
+    construcao-de-compiladores/T2/alguma-sintatico
+
+
+
+-  ## Execução - T1
 
 Após a compilação, execute o `.jar` gerado com o comando:
 
@@ -57,7 +67,7 @@ Após a compilação, execute o `.jar` gerado com o comando:
 java -jar "construcao-de-compiladores/T1/algumalexico/target/algumalexico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/entrada.txt" "construcao-de-compiladores/saida.txt"
 ```
 
-## Execução - T2
+-  ## Execução - T2
 
 Após a compilação, execute o `.jar` gerado com o comando:
 
