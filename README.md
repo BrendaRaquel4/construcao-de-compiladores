@@ -5,8 +5,8 @@ pelo professor **Daniel Lucredio** na **UFSCar -- São Carlos**.
 
 ## Autores
 
--   Josué Martins da Conceição RA: 769613
--   Brenda Raquel Maia RA:757891
+-   Josué Martins da Conceição RA: 769613 (Turma A)
+-   Brenda Raquel Maia RA:757891 (Turma B)
 
 ## Descrição
 
