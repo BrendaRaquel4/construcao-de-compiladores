@@ -10,7 +10,7 @@ pelo Professor Dr. **Daniel Lucredio** no Departamento de Computação | UFSCar 
 
 ## Descrição
 
-Este repositório implementa um **analisador léxico** capaz de
+Este repositório implementa um **compilador** capaz de
 interpretar a linguagem **LA**, desenvolvida pelo professor Jander.
 
 ## Pré-requisitos
