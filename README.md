@@ -64,7 +64,7 @@ Execute o comando dentro do diretório:
 Após a compilação, execute o `.jar` gerado com o comando:
 
 ``` bash
-java -jar "construcao-de-compiladores/T1/algumalexico/target/algumalexico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/entrada.txt" "construcao-de-compiladores/saida.txt"
+java -jar "construcao-de-compiladores/T1/algumalexico/target/algumalexico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/T1/entrada.txt" "construcao-de-compiladores/T1/saida.txt"
 ```
 
 -  ## Execução - T2
@@ -72,7 +72,7 @@ java -jar "construcao-de-compiladores/T1/algumalexico/target/algumalexico-1.0-SN
 Após a compilação, execute o `.jar` gerado com o comando:
 
 ``` bash
-java -jar "construcao-de-compiladores/T2/alguma-sintatico/target/alguma-sintatico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/entrada.txt" "construcao-de-compiladores/saida.txt"
+java -jar "construcao-de-compiladores/T2/alguma-sintatico/target/alguma-sintatico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/T2/entrada.txt" "construcao-de-compiladores/T2/saida.txt"
 ```
 
 Sendo primeiro o caminho para o executavel (para ambas as execuções), depois o primeiro argumento do código(a entrada) e o segundo argumento o caminho para o arquivo de saída. (modifique os caminhos para onde estão os arquivos)
