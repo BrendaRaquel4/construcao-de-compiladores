@@ -29,7 +29,7 @@ As dependências do projeto já estão definidas no arquivo `pom.xml`.
 
 O código-fonte a ser analisado deve ser colocado no arquivo:
 
-    construcao-de-compiladores/entrada.txt
+    construcao-de-compiladores/.../entrada.txt
 
 > Importante: insira o código **antes de compilar o projeto**.
 
@@ -37,7 +37,7 @@ O código-fonte a ser analisado deve ser colocado no arquivo:
 
 O resultado da análise será gerado em:
 
-    construcao-de-compiladores/saida.txt
+    construcao-de-compiladores/.../saida.txt
 
 ## 3. Compilar
 Para compilar cada parte do projeto separado, execute o comando nos diretórios especifícos abaixo:
