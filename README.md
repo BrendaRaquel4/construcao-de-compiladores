@@ -58,6 +58,13 @@ Execute o comando dentro do diretório:
     construcao-de-compiladores/T2/alguma-sintatico
 
 
+-  ## Para compilar T3
+
+Execute o comando dentro do diretório:
+
+    construcao-de-compiladores/T3/alguma-semantico
+
+
 
 -  ## Execução - T1
 
@@ -75,4 +82,12 @@ Após a compilação, execute o `.jar` gerado com o comando:
 java -jar "construcao-de-compiladores/T2/alguma-sintatico/target/alguma-sintatico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/T2/entrada.txt" "construcao-de-compiladores/T2/saida.txt"
 ```
 
-Sendo primeiro o caminho para o executavel (para ambas as execuções), depois o primeiro argumento do código(a entrada) e o segundo argumento o caminho para o arquivo de saída. (modifique os caminhos para onde estão os arquivos)
+-  ## Execução - T3
+
+Após a compilação, execute o `.jar` gerado com o comando:
+
+``` bash
+java -jar "construcao-de-compiladores/T3/alguma-semantico/target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/T3/entrada.txt" "construcao-de-compiladores/T3/saida.txt"
+```
+
+Sendo primeiro o caminho para o executavel (para ambas as execuções), depois o primeiro argumento do código(a entrada) e o segundo argumento o caminho para o arquivo de saída. (modifique os caminhos para os diretorios onde estão os arquivos)

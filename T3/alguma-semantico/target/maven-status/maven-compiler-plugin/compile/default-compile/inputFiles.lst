@@ -1,0 +1,11 @@
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/src/main/java/br/ufscar/dc/compiladores/alguma/semantico/AlgumaSemantico.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/src/main/java/br/ufscar/dc/compiladores/alguma/semantico/AlgumaSemanticoUtils.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/target/generated-sources/antlr4/br/ufscar/dc/compiladores/alguma/semantico/AlgumaParser.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/target/generated-sources/antlr4/br/ufscar/dc/compiladores/alguma/semantico/AlgumaLexer.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/src/main/java/br/ufscar/dc/compiladores/alguma/semantico/TabelaDeSimbolos.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/target/generated-sources/antlr4/br/ufscar/dc/compiladores/alguma/semantico/AlgumaBaseListener.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/target/generated-sources/antlr4/br/ufscar/dc/compiladores/alguma/semantico/AlgumaBaseVisitor.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/target/generated-sources/antlr4/br/ufscar/dc/compiladores/alguma/semantico/AlgumaVisitor.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/src/main/java/br/ufscar/dc/compiladores/alguma/semantico/Principal.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/src/main/java/br/ufscar/dc/compiladores/alguma/semantico/Escopos.java
+/home/josue/construcao-de-compiladores/T3/alguma-semantico/target/generated-sources/antlr4/br/ufscar/dc/compiladores/alguma/semantico/AlgumaListener.java
