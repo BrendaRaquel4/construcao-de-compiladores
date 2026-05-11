@@ -63,6 +63,13 @@ Execute o comando dentro do diretório:
 Execute o comando dentro do diretório:
 
     construcao-de-compiladores/T3/alguma-semantico
+    
+
+-  ## Para compilar T4
+
+Execute o comando dentro do diretório:
+
+    construcao-de-compiladores/T4/alguma-semantico
 
 
 
@@ -90,4 +97,11 @@ Após a compilação, execute o `.jar` gerado com o comando:
 java -jar "construcao-de-compiladores/T3/alguma-semantico/target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/T3/entrada.txt" "construcao-de-compiladores/T3/saida.txt"
 ```
 
+-  ## Execução - T4
+
+Após a compilação, execute o `.jar` gerado com o comando:
+
+``` bash
+java -jar "construcao-de-compiladores/T4/alguma-semantico/target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar" "construcao-de-compiladores/T4/entrada.txt" "construcao-de-compiladores/T4/saida.txt"
+```
 Sendo primeiro o caminho para o executavel (para ambas as execuções), depois o primeiro argumento do código(a entrada) e o segundo argumento o caminho para o arquivo de saída. (modifique os caminhos para os diretorios onde estão os arquivos)
