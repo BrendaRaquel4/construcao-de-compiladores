@@ -42,7 +42,8 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
 
     private final Escopos pilhaDeTabelas;
     private final TabelaDeSimbolos tabela;
-    private final StringBuilder saida = new StringBuilder();
+    private  StringBuilder saida = new StringBuilder();
+    private boolean usaStringH = false;
 
     public AlgumaGeradorC(Escopos sem) {
         this.pilhaDeTabelas = sem;
@@ -51,16 +52,39 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
 
     @Override
     public Void visitPrograma(ProgramaContext ctx) {
-        saida.append("#include <stdio.h>\n")
-            .append("#include <stdlib.h>\n\n");
-                //.append("#include <string.h>\n\n");
+        // Etapa 1: processar declarações globais (podem marcar usaStringH)
+        StringBuilder declsOutput = saida;
+        saida = new StringBuilder();
+        
         for (DeclaracoesContext dec : ctx.declaracoes()) {
             visitDeclaracoes(dec);
         }
-        saida.append("\nint main() {\n");
+        
+        StringBuilder declsCode = saida;
+        saida = new StringBuilder();
+        
+        // Etapa 2: processar corpo (marca usaStringH se necessário)
+        StringBuilder bodyTemp = saida;
+        saida.append(""); // placeholder para corpo
         visitCorpo(ctx.corpo());
-        saida.append("   return 0;\n")
+        StringBuilder bodyCode = saida;
+        saida = new StringBuilder();
+        
+        // Etapa 3: montar saída final com cabeçalho correto
+        saida.append("#include <stdio.h>\n")
+                .append("#include <stdlib.h>\n");
+        
+        if (usaStringH) {
+            saida.append("#include <string.h>\n");
+        }
+        
+        saida.append("\n");
+        saida.append(declsCode);  // typedef e procedimentos/funções
+        saida.append("int main() {\n");
+        saida.append(bodyCode);   // variáveis locais e comandos
+        saida.append("\treturn 0;\n")
                 .append("}\n");
+        
         return null;
     }
 
@@ -132,7 +156,7 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
                         && entradaTipo.getTipo() == TipoAlguma.REGISTRO) {
                     for (IdentificadorContext idCtx : var.identificador()) {
                         String varName = idCtx.getText();
-                        saida.append("    ")
+                        saida.append("\t")
                                 .append(nomeTipo).append(" ")
                                 .append(varName).append(";\n");
                         pilhaDeTabelas.obterEscopoAtual().adicionar(
@@ -223,7 +247,7 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
                         false,
                         false);
                 // emite a linha em C
-                saida.append("    ")
+                saida.append("\t")
                         .append(cTipo).append(ehPonteiro ? "*" : "")
                         .append(" ").append(nomeVar)
                         .append(tipoT5 == TipoAlguma.LITERAL ? "[80]" : "")
@@ -432,12 +456,12 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
             String nome = idCtx.getText();
             var info = AlgumaSemanticoUtils.verificarIdentificador(pilhaDeTabelas, idCtx);
             if (info.tipo == TipoAlguma.LITERAL) {
-                saida.append("\tgets(").append(nome).append(");\n");
+                    saida.append("\tscanf(\"%79s\", ").append(nome).append(");\n");
             } else {
                 String fmt = (info.tipo == TipoAlguma.REAL ? "%f" : "%d");
                 // se for ponteiro, já é endereço; senão usa &nome
                 String alvo = info.ehPonteiro ? nome : "&" + nome;
-                saida.append("scanf(\"").append(fmt).append("\", ").append(alvo).append(");\n");
+                saida.append("\tscanf(\"").append(fmt).append("\", ").append(alvo).append(");\n");
             }
         }
         return null;
@@ -456,7 +480,7 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
                 saida.append("\tprintf(\"%s\",").append(txt).append(");\n");
             } else {
                 String fmt = (tipo == TipoAlguma.REAL ? "%f" : "%d");
-                saida.append("\tprintf(\"").append(fmt).append("\", ").append(txt).append(");\n");
+                saida.append("\tprintf(\"").append(fmt).append("\",").append(txt).append(");\n");
             }
         }
         return null;
@@ -471,7 +495,8 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
 
         if (info.tipo == TipoAlguma.LITERAL) {
             // strcpy para string
-            saida.append("\tstrcpy(").append(alvo).append(", ");
+            usaStringH = true;
+            saida.append("\tstrcpy(").append(alvo).append(",");
             visitExpressao(ctx.expressao());
             saida.append(");\n");
         } else {
@@ -494,7 +519,7 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
     @Override
     public Void visitCmdFaca(AlgumaParser.CmdFacaContext ctx) {
         // abre o do {
-        saida.append("    do {\n");
+        saida.append("\tdo {\n");
         for (AlgumaParser.CmdContext c : ctx.cmd())
             visitCmd(c);
         // decide a forma de while
@@ -526,7 +551,7 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
     @Override
     public Void visitCmdSe(CmdSeContext ctx) {
         // abre o if
-        saida.append("if(");
+        saida.append("\tif (");
         visitExpressao(ctx.expressao());
         saida.append(") {\n");
 
@@ -550,15 +575,15 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
         for (CmdContext c : thenCmds) {
             visitCmd(c);
         }
-        saida.append("}\n");
+        saida.append("\t}\n");
 
         // gera o bloco else se houver
         if (!elseCmds.isEmpty()) {
-            saida.append("else {\n");
+            saida.append("\telse {\n");
             for (CmdContext c : elseCmds) {
                 visitCmd(c);
             }
-            saida.append("}\n");
+            saida.append("\t}\n");
         }
 
         return null;
@@ -566,13 +591,13 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
 
     @Override
     public Void visitCmdEnquanto(CmdEnquantoContext ctx) {
-        saida.append("while(");
+        saida.append("\twhile (");
         visitExpressao(ctx.expressao());
         saida.append(") {\n");
         for (CmdContext c : ctx.cmd()) {
             visitCmd(c);
         }
-        saida.append("}\n");
+        saida.append("\t}\n");
         return null;
     }
 
@@ -582,21 +607,21 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
         String exprInicial = ctx.exp_aritmetica(0).getText();
         String exprFinal = ctx.exp_aritmetica(1).getText();
 
-        saida.append("for (").append(varControle).append(" = ").append(exprInicial)
+        saida.append("\tfor (").append(varControle).append(" = ").append(exprInicial)
                 .append("; ").append(varControle).append(" <= ").append(exprFinal)
                 .append("; ").append(varControle).append("++) {\n");
 
         for (CmdContext c : ctx.cmd()) {
             visitCmd(c);
         }
-        saida.append("}\n");
+        saida.append("\t}\n");
         return null;
     }
 
     @Override
     public Void visitCmdCaso(CmdCasoContext ctx) {
         String expr = ctx.exp_aritmetica().getText();
-        saida.append("switch(")
+        saida.append("\tswitch (")
                 .append(expr)
                 .append(") {\n");
 
@@ -616,24 +641,23 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
             }
             // comandos do case
             for (CmdContext cmd : item.cmd()) {
-                // identa um nível extra para ficar bonitinho
-                saida.append("\t\t\t"); // 4 espaços para indentação, ajuste se necessário
+                saida.append("\t\t\t");
                 visitCmd(cmd);
             }
-            saida.append("\t\tbreak;\n"); // 4 espaços para indentação, ajuste se necessário
+            saida.append("\t\t\tbreak;\n");
         }
 
         // bloco senao vira default
         if (ctx.SENAO() != null) {
             saida.append("\t\tdefault:\n");
             for (CmdContext cmd : ctx.cmd()) {
-                saida.append("      "); // 4 espaços para indentação, ajuste se necessário
+                saida.append("\t\t\t");
                 visitCmd(cmd);
             }
-            saida.append("\t\tbreak;\n");
+            saida.append("\t\t\tbreak;\n");
         }
 
-        saida.append("}\n");
+        saida.append("\t}\n");
         return null;
     }
 
@@ -641,7 +665,7 @@ public class AlgumaGeradorC extends AlgumaBaseVisitor<Void> {
     public Void visitCmdChamada(AlgumaParser.CmdChamadaContext ctx) {
         // ex: proc_imprime("teste");
         String nome = ctx.IDENT().getText();
-        saida.append("   ")
+        saida.append("\t")
                 .append(nome)
                 .append("(");
         for (int i = 0; i < ctx.expressao().size(); i++) {
